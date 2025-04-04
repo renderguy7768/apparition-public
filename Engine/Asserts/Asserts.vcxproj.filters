@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{d71f5a74-adbc-4628-8234-1c43a46d7670}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Windows\ExternalLibraries.win.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration.h" />
+    <ClInclude Include="Asserts.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Asserts.cpp" />
+    <ClCompile Include="Windows\Asserts.win.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
