@@ -43,10 +43,14 @@ bool apparition::Asserts::ShowMessageIfAssertionIsFalseAndReturnWhetherToBreak(c
     }
 
     // Display it and break if necessary
-    // Add more platforms checks here when they are implementing this function
-#if defined(APPARITION_OS_API_WINDOWS)
     return ShowMessageIfAssertionIsFalseAndReturnWhetherToBreakPlatformSpecific(message, io_shouldThisAssertBeIgnoredInTheFuture);
-#else
+}
+
+// When no platform defines this platform specific function,
+// this default implementation is used
+#if !defined(APPARITION_OS_API_WINDOWS)
+bool apparition::Asserts::ShowMessageIfAssertionIsFalseAndReturnWhetherToBreakPlatformSpecific(std::ostringstream& io_message, bool& io_shouldThisAssertBeIgnoredInTheFuture)
+{
     // Always try to break at-least once per execution
     // if no platform specific implementation is found
     if (!io_shouldThisAssertBeIgnoredInTheFuture)
@@ -55,7 +59,7 @@ bool apparition::Asserts::ShowMessageIfAssertionIsFalseAndReturnWhetherToBreak(c
         return true;
     }
     return false;
-#endif
 }
 #endif
 
+#endif

@@ -5,7 +5,8 @@
 
 namespace
 {
-    static constexpr char s_MessageBoxTitle[] = "Assertion Failed!";
+    static constexpr uint32_t s_MessageBoxType    = MB_YESNOCANCEL;
+    static constexpr char     s_MessageBoxTitle[] = "Assertion Failed!";
 }
 
 bool apparition::Asserts::ShowMessageIfAssertionIsFalseAndReturnWhetherToBreakPlatformSpecific(std::ostringstream& io_message, bool& io_shouldThisAssertBeIgnoredInTheFuture)
@@ -20,7 +21,8 @@ bool apparition::Asserts::ShowMessageIfAssertionIsFalseAndReturnWhetherToBreakPl
     io_message << "\n\n"
         "Do you want to break into the debugger (if it's attached)?"
         " Choose \"Yes\" to break, \"No\" to continue, or \"Cancel\" to disable this assertion until the program exits.";
-    const int result = MessageBoxA(GetActiveWindow(), io_message.str().c_str(), s_MessageBoxTitle, MB_YESNOCANCEL);
+    const HWND activeWindowHandleInThisThread = GetActiveWindow(); // Can be NULL if window is out of input focus
+    const int result = MessageBoxA(activeWindowHandleInThisThread, io_message.str().c_str(), s_MessageBoxTitle, s_MessageBoxType);
     if ((result == IDYES) ||
         // MessageBox() returns 0 on failure; if this happens the code breaks rather than trying to diagnose why
         (result == 0))
