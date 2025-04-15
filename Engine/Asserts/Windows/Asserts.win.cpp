@@ -11,6 +11,8 @@ namespace
 
 bool apparition::Asserts::ShowMessageIfAssertionIsFalseAndReturnWhetherToBreakPlatformSpecific(std::ostringstream& io_message, bool& io_shouldThisAssertBeIgnoredInTheFuture)
 {
+    io_message << "\n\n";
+
 #ifdef APPARITION_ASSERTS_SHOULD_PRINT_TO_DEBUGGER
     if (IsDebuggerPresent() != FALSE)
     {
@@ -18,8 +20,7 @@ bool apparition::Asserts::ShowMessageIfAssertionIsFalseAndReturnWhetherToBreakPl
     }
 #endif
 
-    io_message << "\n\n"
-        "Do you want to break into the debugger (if it's attached)?"
+    io_message << "Do you want to break into the debugger (if it's attached)?"
         " Choose \"Yes\" to break, \"No\" to continue, or \"Cancel\" to disable this assertion until the program exits.";
     const HWND activeWindowHandleInThisThread = GetActiveWindow(); // Can be NULL if window is out of input focus
     const int result = MessageBoxA(activeWindowHandleInThisThread, io_message.str().c_str(), s_MessageBoxTitle, s_MessageBoxType);

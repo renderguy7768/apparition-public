@@ -30,15 +30,16 @@ namespace apparition
     }
 }
 
-// Breaking could be defined in Asserts.cpp and avoid any platform-specific code here in the header file, but then the debugger would break in Asserts.cpp rather than in the file where the failed assert is
+// Breaking could be defined in Asserts.cpp to avoid any platform-specific code here in the header file, but then the debugger would break in Asserts.cpp rather than in the file where the failed assert is
 #if defined(APPARITION_OS_API_WINDOWS)
 #include "Engine/Windows/Includes.h"
+#include <intrin.h>
 #define APPARITION_ASSERTS_BREAK() \
 do \
 { \
     if (IsDebuggerPresent() != FALSE) \
     { \
-        DebugBreak(); \
+        __debugbreak(); \
     } \
 } while (false)
 #else
