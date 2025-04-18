@@ -68,7 +68,7 @@ static bool TestingVanillaResults_Internal_MemoryAllocation(void)
     std::cout << "Testing results - Memory Allocation" << std::endl;
 
     bool result;
-    constexpr size_t MemoryToAllocate = static_cast<size_t>(~0);
+    constexpr size_t MemoryToAllocate = static_cast<size_t>(100);
     void* someMemory = malloc(MemoryToAllocate);
 
     result = someMemory != nullptr;
@@ -88,7 +88,7 @@ static bool TestingVanillaResults_Internal_FileIO(void)
 
     bool result = true;
 
-    const std::filesystem::path filePath = "D://xample.txt";
+    const std::filesystem::path filePath = "D://example.txt";
 
     // Check if file path is valid
     if (std::filesystem::exists(filePath))
@@ -201,7 +201,7 @@ static apparition::Results::cResult TestingApparitionResults_Internal_FileIO(voi
 
     apparition::Results::cResult result = apparition::Results::Success;
 
-    const std::filesystem::path filePath = "D://xample.txt";
+    const std::filesystem::path filePath = "D://example.txt";
 
     // The following code can be improved with logging and scope guards
 
